@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensure bindings are initialized.
-
+///test
   // Starting Firebase in App:
   await Firebase.initializeApp(
     // Use specific configData on each platform.
