@@ -77,16 +77,7 @@ class _YearCalendarState extends State<YearCalendar> {
 
   Widget buildYearCalendarBody(ScrollController controller, YearProvider yearProvider) {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [Color(0xFF6CA7BE), Color(0xFF2E0B4B)],
-          tileMode: TileMode.repeated,
-          stops: [0.1, 0.9],
-          transform: GradientRotation(45 * pi / 180),
-        ),
-      ),
+      decoration: BoxDecoration(gradient: DefaultBackgroundColor.gradient),
       child: Column(
         children: [
           TimeColumn(timeController: controller, now: DateTime.now()),
@@ -99,6 +90,7 @@ class _YearCalendarState extends State<YearCalendar> {
   Widget buildMonthsGridView(YearProvider yearProvider) {
     return Flexible(
       child: GridView.builder(
+        physics: NeverScrollableScrollPhysics(),
         key: PageStorageKey('MonthGridView-${yearProvider.year}'),
         itemCount: 12,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

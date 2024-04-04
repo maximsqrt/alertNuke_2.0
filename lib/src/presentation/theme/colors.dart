@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 
@@ -77,9 +79,13 @@ class SettingsBackgroundColor {
   }
 }
 
-
-
-
-
-
-
+class DefaultBackgroundColor {
+  static final gradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [Color(0xFF6CA7BE), Color(0xFF2E0B4B)],
+   
+    stops: [0, 1.9],
+    transform: GradientRotation(45 * pi / 400),
+  );
+}
