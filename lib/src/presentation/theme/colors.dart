@@ -89,3 +89,18 @@ class DefaultBackgroundColor {
     transform: GradientRotation(45 * pi / 400),
   );
 }
+
+
+class DefaultDayColor{
+  static const primaryColor = Color.fromARGB(160, 255, 255, 255);
+}
+class AppointmentDayColor {
+  static const primaryColor = Color.fromARGB(255, 225, 0, 255);
+}
+class WeekendDayColor {
+  static const sathurdayColor = Color.fromARGB(203, 34, 138, 203);
+  static const sundayColor = Color.fromARGB(255, 56, 255, 116);
+}
+class IsTodayDayColor {
+  static const primaryColor = const Color.fromARGB(255, 76, 175, 80);
+}

@@ -50,9 +50,9 @@ int correctedMonthIndex = monthIndex + 1;
             if (snapshot.connectionState == ConnectionState.waiting) {
               dayColor = Colors.transparent; // Default color while loading or if there's no data
             } else if (snapshot.hasData && snapshot.data!) {
-              dayColor = Colors.green; // Color indicating an appointment exists
+              dayColor = AppointmentDayColor.primaryColor; // Color indicating an appointment exists
             } else {
-              dayColor = const Color.fromARGB(0, 255, 0, 0); // No appointments
+              dayColor = DefaultDayColor.primaryColor; // No appointments
             }
 
             // Use dayColor determined by FutureBuilder for the border color
@@ -66,7 +66,7 @@ int correctedMonthIndex = monthIndex + 1;
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                      width: 0.40,
+                      width: 0.90,
                       color: dayColor,
                     ),
                 borderRadius: BorderRadius.circular(6.0),
@@ -79,7 +79,7 @@ int correctedMonthIndex = monthIndex + 1;
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: actualFontSize.toDouble(),
-                    color: const Color.fromARGB(187, 233, 220, 220),
+                    color: dayColor,
 
                   ),
                   

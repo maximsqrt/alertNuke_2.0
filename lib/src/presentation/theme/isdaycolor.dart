@@ -1,22 +1,28 @@
 import 'dart:ui';
 
 import 'package:alertnukeapp_ver2/src/data/provider/yearprovider.dart';
+import 'package:alertnukeapp_ver2/src/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 Color determineDayColor(DateTime date, bool isCurrentMonth, YearProvider yearProvider) {
   DateTime now = DateTime.now();
   bool isToday = isCurrentMonth && date.day == now.day && date.year == now.year;
-  bool isWeekEndDay = isWeekend(date);
+  
 
   if (isToday) {
-    return Colors.green; // Farbe für den aktuellen Tag
-  } else if (isWeekEndDay) {
-    return const Color.fromARGB(164, 33, 149, 243); // Eine andere Farbe für Wochenendtage
+    return IsTodayDayColor.primaryColor; // Farbe für den aktuellen Tag
+  } else if (isSathurday(date)) {
+    return WeekendDayColor.sathurdayColor; 
+      } else if (isSunday(date)) {
+    return const Color.fromARGB(126, 56, 255, 116); /// Eine andere Farbe für Wochenendtage
   } else {
     return Colors.transparent; // Standardfarbe für andere Tage
   }
 }
 
-bool isWeekend(DateTime date) {
-  return date.weekday == 6 || date.weekday == 7;
+bool isSathurday(DateTime date) {
+  return date.weekday == 6 ;
+}
+bool isSunday(DateTime date) {
+  return date.weekday == 7;
 }
