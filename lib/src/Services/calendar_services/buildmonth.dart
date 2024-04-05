@@ -51,7 +51,7 @@ Widget buildMonthPage(int monthIndex, YearProvider yearProvider,  double childAs
                 ),
                 borderRadius: BorderRadius.circular(9.0),
                 ///Diff Color for today? 
-                color: isToday? Colors.red : Colors.transparent,
+                // color: isToday? Colors.red : Colors.transparent,
               ),
               child: Center(
                 child: Text(

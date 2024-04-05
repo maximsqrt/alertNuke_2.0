@@ -11,32 +11,6 @@ import 'package:flutter/material.dart';
 
 
 
-// class AppointmentIndicator extends StatelessWidget {
-//   final DateTime date;
-
-//   AppointmentIndicator({Key? key, required this.date}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return FutureBuilder<bool>(
-//       future: AppointmentUtils.hasAppointmentsOnDay(date), // Use our utility to check for appointments
-//       builder: (context, snapshot){ 
-//        Color borderColor;
-//     if (snapshot.connectionState == ConnectionState.waiting) {
-//       borderColor = Colors.grey; // Default color or loading color
-//     } else if (snapshot.hasData && snapshot.data!) {
-//       borderColor = Colors.green; // Color indicating an appointment exists
-//     } else {
-//       borderColor = Colors.transparent; // No appointments
-//     }return GestureDetector(
-//               onTap: () {
-//                 print("Day tapped: $day");
-//                 dayCallback(day);
-//               },
-//     },
-//     );
-//   }
-// }
 
 class AppointmentUtils {
   static Future<bool> hasAppointmentsOnDay(DateTime date) async {

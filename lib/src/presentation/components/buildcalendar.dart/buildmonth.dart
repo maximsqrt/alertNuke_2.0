@@ -52,7 +52,7 @@ int correctedMonthIndex = monthIndex + 1;
             } else if (snapshot.hasData && snapshot.data!) {
               dayColor = Colors.green; // Color indicating an appointment exists
             } else {
-              dayColor = Colors.transparent; // No appointments
+              dayColor = const Color.fromARGB(0, 255, 0, 0); // No appointments
             }
 
             // Use dayColor determined by FutureBuilder for the border color

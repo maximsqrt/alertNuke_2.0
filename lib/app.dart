@@ -7,6 +7,7 @@ import 'package:alertnukeapp_ver2/src/data/provider/profilepictureprovider.dart'
 import 'package:alertnukeapp_ver2/src/data/provider/savediconsprovider.dart';
 import 'package:alertnukeapp_ver2/src/data/provider/yearprovider.dart';
 import 'package:alertnukeapp_ver2/src/presentation/login/login.dart';
+import 'package:alertnukeapp_ver2/src/presentation/navigation/overview/overview.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
@@ -39,8 +40,21 @@ class AlertnukeApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        home: LoginScreen(), // Startseite ist der LoginScreen
+        home: AuthWrapper(), // Startseite ist der LoginScreen
       ),
     );
+  }
+}
+///CHeck If User is already Logged in 
+class AuthWrapper extends StatelessWidget{
+  @override
+  Widget build(BuildContext) {
+    User? user = FirebaseAuth.instance.currentUser;
+      //check if user is logged in 
+      if (user == null) {
+        return LoginScreen();
+      } else { 
+        return Overview();
+      }
   }
 }
