@@ -13,13 +13,21 @@ class MonthGridItem extends StatelessWidget {
   Function(int) showMonth;
   Function(int) dayCallback;
   
- MonthGridItem({super.key, required this.monthIndex, required this.yearProvider, required this.showMonth,required this.dayCallback});
+ MonthGridItem(
+
+  {super.key, 
+ required this.monthIndex, 
+ required this.yearProvider, 
+ required this.showMonth,
+ required this.dayCallback
+ });
 
   @override
   Widget build(BuildContext context) {
-  
+  print('month GridItemIndex: $monthIndex');
+  //On Tap functionality to build month on Tap
     return GestureDetector(
-      onTap: () => showMonth(monthIndex +1),
+      onTap: () => showMonth(monthIndex ),
       child: Container(
         padding: const EdgeInsets.all(8.0),
         child: Column(

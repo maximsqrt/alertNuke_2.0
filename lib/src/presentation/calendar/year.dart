@@ -1,5 +1,6 @@
 
-import 'dart:math';
+
+// ignore_for_file: library_private_types_in_public_api
 
 import 'package:alertnukeapp_ver2/src/Services/calendar_services/timecolumn.dart';
 import 'package:alertnukeapp_ver2/src/data/provider/yearprovider.dart';
@@ -16,12 +17,12 @@ class YearCalendar extends StatefulWidget {
   final Function(int) changeYearStatus;
 
   const YearCalendar({
-    Key? key,
+    super.key,
     required this.changeDayStatus,
     required this.changeMonthStatus,
     required this.selectedYear,
     required this.changeYearStatus,
-  }) : super(key: key);
+  });
 
   @override
   _YearCalendarState createState() {
@@ -45,26 +46,26 @@ class _YearCalendarState extends State<YearCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController _scrollController = ScrollController();
+    final ScrollController scrollController = ScrollController();
     final yearProvider = Provider.of<YearProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
           yearProvider.year.toString(),
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: FancyFontColor.primaryColor,
             fontSize: 50,
           ),
         ),
         leading: IconButton(
-          icon: Icon(UniconsLine.arrow_down, color: Colors.white, size: 50.0),
+          icon: const Icon(UniconsLine.arrow_down, color: Colors.white, size: 50.0),
           onPressed: () => _updateYear(-1),
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(UniconsLine.arrow_up, color: Colors.white, size: 50.0),
+            icon: const Icon(UniconsLine.arrow_up, color: Colors.white, size: 50.0),
             onPressed: () => _updateYear(1),
           ),
         ],
@@ -78,9 +79,11 @@ class _YearCalendarState extends State<YearCalendar> {
           ),
         ),
       ),
-      body: buildYearCalendarBody(_scrollController, yearProvider),
+      body: buildYearCalendarBody(scrollController, yearProvider),
     );
   }
+
+//Build Body for the Calendar
 
   Widget buildYearCalendarBody(ScrollController controller, YearProvider yearProvider) {
     return Container(
@@ -93,11 +96,12 @@ class _YearCalendarState extends State<YearCalendar> {
       ),
     );
   }
-
+//Create GridView for all 12 Months with data from YearProvider
   Widget buildMonthsGridView(YearProvider yearProvider) {
+   
     return Flexible(
       child: GridView.builder(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         key: PageStorageKey('MonthGridView-${yearProvider.year}'),
         itemCount: 12,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -105,12 +109,16 @@ class _YearCalendarState extends State<YearCalendar> {
           mainAxisSpacing: 5,
           crossAxisSpacing: 5,
         ),
-        itemBuilder: (context, index) => buildMonthCard(index, yearProvider),
+        itemBuilder: (context, index){ 
+          //  print('month Card Index: $index');
+           return buildMonthCard(index, yearProvider);
+        }
       ),
     );
   }
-
+//Create Card for every Month 
   Widget buildMonthCard(int index, YearProvider yearProvider) {
+    // print('month Card Index: $index');
     return Column(
       children: [
         Card(
@@ -120,8 +128,10 @@ class _YearCalendarState extends State<YearCalendar> {
             aspectRatio: 1.0,
             child: MonthGridItem(
               monthIndex: index,
+              
               yearProvider: yearProvider,
-              showMonth: (newMonthIndex) => widget.changeMonthStatus(newMonthIndex - 2),
+              //Gesturedetector for on tap buildmonthScreen defined in @monthgriditem
+              showMonth: (newMonthIndex) => widget.changeMonthStatus(newMonthIndex),
               dayCallback: widget.changeDayStatus,
             ),
           ),

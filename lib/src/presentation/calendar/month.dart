@@ -40,7 +40,7 @@ class _MonthCalendarState extends State<MonthCalendar> {
   @override
   void initState() {
     super.initState();
-    currentPage = widget.monthIndex + 1;
+    currentPage = widget.monthIndex;
     _pageController = PageController(initialPage: currentPage);
     _timeController = TextEditingController();
   }
