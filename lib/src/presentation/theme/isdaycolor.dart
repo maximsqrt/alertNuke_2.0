@@ -14,7 +14,7 @@ Color determineDayColor(DateTime date, bool isCurrentMonth, YearProvider yearPro
   } else if (isSathurday(date)) {
     return WeekendDayColor.sathurdayColor; 
       } else if (isSunday(date)) {
-    return const Color.fromARGB(126, 56, 255, 116); /// Eine andere Farbe für Wochenendtage
+    return WeekendDayColor.sundayColor; /// Eine andere Farbe für Wochenendtage
   } else {
     return Colors.transparent; // Standardfarbe für andere Tage
   }

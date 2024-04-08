@@ -32,8 +32,8 @@ int correctedMonthIndex = monthIndex + 1;
       itemCount: dateTimeCalc.daysInMonth(correctedMonthIndex),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 7,
-        mainAxisSpacing: 0,
-        crossAxisSpacing: 0,
+        mainAxisSpacing: 1,
+        crossAxisSpacing: 1,
         childAspectRatio: childAspectRatio,
       ),
       itemBuilder: (context, index) {
@@ -66,7 +66,7 @@ int correctedMonthIndex = monthIndex + 1;
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                      width: 0.90,
+                      width: 0.70,
                       color: dayColor,
                     ),
                 borderRadius: BorderRadius.circular(6.0),

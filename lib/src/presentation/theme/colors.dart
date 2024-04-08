@@ -98,9 +98,9 @@ class AppointmentDayColor {
   static const primaryColor = Color.fromARGB(255, 225, 0, 255);
 }
 class WeekendDayColor {
-  static const sathurdayColor = Color.fromARGB(203, 34, 138, 203);
-  static const sundayColor = Color.fromARGB(255, 56, 255, 116);
+  static const sathurdayColor = Color.fromARGB(194, 158, 126, 213);
+  static const sundayColor = Color.fromARGB(103, 56, 169, 206);
 }
 class IsTodayDayColor {
-  static const primaryColor = const Color.fromARGB(255, 76, 175, 80);
+  static const primaryColor = Color.fromARGB(255, 81, 227, 115);
 }
