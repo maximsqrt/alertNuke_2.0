@@ -13,12 +13,15 @@ class DayCalendar extends StatefulWidget {
   final int selectedDay;
   final DateTime selectedDate;
   final int monthNumber;
+  final int selectedYear;
 
   const DayCalendar(
       {Key? key,
       required this.selectedDay,
       required this.monthNumber,
-      required this.selectedDate})
+      required this.selectedDate,
+      required this.selectedYear
+      })
       : super(key: key);
 
   @override
@@ -36,12 +39,12 @@ class _DayCalendarState extends State<DayCalendar> {
   void initState() {
     currentDate =
         // month index ist delayed by 1 in monthgridview 
-        DateTime(currentDate.year, widget.monthNumber + 1, widget.selectedDay);
+        DateTime(widget.selectedYear, widget.monthNumber + 1, widget.selectedDay);
     super.initState();
     print("Init monthNumber: ${widget.monthNumber}");
     selectedDate = DateTime(
       // month index ist delayed by 1 in monthgridview 
-        DateTime.now().year, widget.monthNumber + 1, widget.selectedDay);
+        widget.selectedYear, widget.monthNumber + 1, widget.selectedDay);
     weekNames = ['Time', widget.selectedDay.toString()];
   }
 
@@ -56,7 +59,7 @@ class _DayCalendarState extends State<DayCalendar> {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
 
-    selectedDate = DateTime(selectedDate.year, widget.selectedDate.month);
+    // selectedDate = DateTime(selectedDate.year, widget.selectedDate.month);
     bool isToday = selectedDate.year == today.year &&
         selectedDate.month == today.month &&
         selectedDate.day == today.day;
@@ -68,7 +71,8 @@ class _DayCalendarState extends State<DayCalendar> {
           '${DateFormat('EEEE').format(selectedDate)}, ${selectedDate.day.toString()} ${DateFormat('MMMM y').format(currentDate)}',
           style: TextStyle(
               fontSize: 18,
-              color: isToday ? Colors.red : FancyFontColor.primaryColor),
+              ///TodaysColor always Green defined in colors.dart
+              color: isToday ? FancyFontColor.primaryColor : Colors.white),
         ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(

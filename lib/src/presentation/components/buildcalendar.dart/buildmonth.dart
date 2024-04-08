@@ -22,6 +22,7 @@ Widget buildMonthPage(
   );
 }
 Widget buildDayWithAppointmentIndicator(DateTime date, bool isCurrentMonth, YearProvider yearProvider, int day, double childAspectRatio, int fontSize, Function(int) dayCallback) {
+//  print("Day cast in builddaywithapp....: $day");
   Color currentDayWeekAndColor = determineDayColor(date, isCurrentMonth, yearProvider);
   return FutureBuilder<bool>(
       future: AppointmentUtils.hasAppointmentsOnDay(date),
@@ -36,6 +37,7 @@ Widget buildDayWithAppointmentIndicator(DateTime date, bool isCurrentMonth, Year
       });
 }
 Widget buildDayContainer(int day, Color dayColor, Color backgroundColor, double childAspectRatio, int fontSize, Function(int) dayCallback) {
+//  print("Day cast in buildDayContainer: $day");
   return GestureDetector(
     onTap: () {
       print("Day tapped: $day");

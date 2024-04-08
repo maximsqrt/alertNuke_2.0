@@ -64,7 +64,7 @@ final calenderProvider = Provider.of<CalendarStateProvider>(context);
   } else if (calenderProvider.getState() == CalendarState.month) {
     return MonthCalendar(monthIndex: selectedMonthIndex, selectedYear: selectedYearIndex, dayCallback: (day) => changeDayStatus(day));
   } else if (calenderProvider.getState() == CalendarState.day) {
-    return DayCalendar(selectedDay: selectedDayIndex, monthNumber: selectedMonthIndex, selectedDate: DateTime(selectedYearIndex, selectedMonthIndex  ),);
+    return DayCalendar(selectedDay: selectedDayIndex, monthNumber: selectedMonthIndex, selectedDate: DateTime(selectedYearIndex, selectedMonthIndex), selectedYear: selectedYearIndex);
   } else { throw Error();       }
 }
  
