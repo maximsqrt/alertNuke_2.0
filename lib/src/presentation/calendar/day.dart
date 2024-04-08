@@ -1,4 +1,3 @@
-
 import 'package:alertnukeapp_ver2/src/data/firestore/appointments.dart';
 import 'package:alertnukeapp_ver2/src/data/firestore/displayappointment.dart';
 import 'package:alertnukeapp_ver2/src/data/firestore/icon_appointment.dart';
@@ -16,7 +15,10 @@ class DayCalendar extends StatefulWidget {
   final int monthNumber;
 
   const DayCalendar(
-      {Key? key, required this.selectedDay, required this.monthNumber, required this.selectedDate})
+      {Key? key,
+      required this.selectedDay,
+      required this.monthNumber,
+      required this.selectedDate})
       : super(key: key);
 
   @override
@@ -33,16 +35,16 @@ class _DayCalendarState extends State<DayCalendar> {
   @override
   void initState() {
     currentDate =
-    // month is verschoben by 2 months, correct later 
-        DateTime(currentDate.year, widget.monthNumber +2, widget.selectedDay);
+        // month index ist delayed by 1 in monthgridview 
+        DateTime(currentDate.year, widget.monthNumber + 1, widget.selectedDay);
     super.initState();
     print("Init monthNumber: ${widget.monthNumber}");
-    selectedDate =
-        DateTime(DateTime.now().year, widget.monthNumber +2 , widget.selectedDay);
+    selectedDate = DateTime(
+      // month index ist delayed by 1 in monthgridview 
+        DateTime.now().year, widget.monthNumber + 1, widget.selectedDay);
     weekNames = ['Time', widget.selectedDay.toString()];
-
-
   }
+
   void _updateDate(int daysToAdd) {
     setState(() {
       selectedDate = selectedDate.add(Duration(days: daysToAdd));
@@ -51,51 +53,41 @@ class _DayCalendarState extends State<DayCalendar> {
 
   @override
   Widget build(BuildContext context) {
-
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
 
+    selectedDate = DateTime(selectedDate.year, widget.selectedDate.month);
+    bool isToday = selectedDate.year == today.year &&
+        selectedDate.month == today.month &&
+        selectedDate.day == today.day;
 
-    
-     selectedDate = DateTime(selectedDate.year, widget.selectedDate.month  );
-      bool isToday = selectedDate.year == today.year &&
-      selectedDate.month == today.month &&
-      selectedDate.day == today.day;
-  
-    
-
-    
-  return  Scaffold(
+    return Scaffold(
       backgroundColor: BackgroundColor.primaryColor,
       appBar: AppBar(
         title: Text(
           '${DateFormat('EEEE').format(selectedDate)}, ${selectedDate.day.toString()} ${DateFormat('MMMM y').format(currentDate)}',
-          style: TextStyle(fontSize: 18, 
-          color: isToday ? Colors.red : FancyFontColor.primaryColor),
-          
-        
+          style: TextStyle(
+              fontSize: 18,
+              color: isToday ? Colors.red : FancyFontColor.primaryColor),
         ),
-         flexibleSpace: Container(
+        flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.bottomLeft,
               end: Alignment.centerRight,
-              colors:  [Color(0xFF6CA7BE), Color(0xFF2E0B4B)],
-
-            
-            
-            ),
+              colors: [Color(0xFF6CA7BE), Color(0xFF2E0B4B)],
             ),
           ),
+        ),
         leading: IconButton(
           icon: const Icon(UniconsLine.arrow_down),
           onPressed: () => _updateDate(-1), // Tag zurück
-      ),
-       actions: <Widget>[
+        ),
+        actions: <Widget>[
           IconButton(
             icon: const Icon(UniconsLine.arrow_up),
             onPressed: () => _updateDate(1), // Tag vor
-             ),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -105,20 +97,24 @@ class _DayCalendarState extends State<DayCalendar> {
               const EdgeInsets.only(top: 50, left: 10, right: 10, bottom: 0),
           child: IntrinsicHeight(
             child: Container(
-                  // Festgelegte Breite für das Zeit-Widget, um es nicht-scrollbar zu machen
-                  width: MediaQuery.of(context).size.width, // Beispielbreite, anpassen nach Bedarf
-                  height: 48 * 39.5, // Deine berechnete Höhe
-                  decoration: BoxDecoration(
-                    gradient: SettingsBackgroundColor
-                        .linearGradient(), // Beispielhintergrundfarbe
-                  ),
-                  child: TimeContainer(timeController: _timeController, selectedDate: selectedDate,),
-                ),
+              // Festgelegte Breite für das Zeit-Widget, um es nicht-scrollbar zu machen
+              width: MediaQuery.of(context)
+                  .size
+                  .width, // Beispielbreite, anpassen nach Bedarf
+              height: 48 * 39.5, // Deine berechnete Höhe
+              decoration: BoxDecoration(
+                gradient: SettingsBackgroundColor
+                    .linearGradient(), // Beispielhintergrundfarbe
+              ),
+              child: TimeContainer(
+                timeController: _timeController,
+                selectedDate: selectedDate,
+              ),
+            ),
           ),
         ),
       ),
     );
-    
   }
 
   ///TappedUpDetails
@@ -165,9 +161,8 @@ class _DayCalendarState extends State<DayCalendar> {
           iconWithName: selectedIcon,
           appointmentDate: appointmentDate,
           iconPosition: position,
-          appointmentDescription:
-              "Beschreibung hier einfügen", 
-              // Füge eine Möglichkeit hinzu, eine Beschreibung zu erfassen
+          appointmentDescription: "Beschreibung hier einfügen",
+          // Füge eine Möglichkeit hinzu, eine Beschreibung zu erfassen
         );
 
         // Termin in Firebase speichern
