@@ -58,7 +58,7 @@ class _DayCalendarState extends State<DayCalendar> {
   Widget build(BuildContext context) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-
+ print('selected date: $selectedDate');
     // selectedDate = DateTime(selectedDate.year, widget.selectedDate.month);
     bool isToday = selectedDate.year == today.year &&
         selectedDate.month == today.month &&
@@ -183,9 +183,9 @@ class _DayCalendarState extends State<DayCalendar> {
 
 class DayContainer extends StatelessWidget {
   final ScrollController dayController;
-  final DateTime selectedDate;
+  final DateTime currentDate;
   DayContainer(
-      {Key? key, required this.dayController, required this.selectedDate})
+      {Key? key, required this.dayController, required this.currentDate})
       : super(key: key);
 
   @override
@@ -197,7 +197,7 @@ class DayContainer extends StatelessWidget {
       ),
       child: SingleChildScrollView(
         controller: dayController,
-        child: AppointmentsDisplay(selectedDate: selectedDate),
+        child: AppointmentsDisplay(selectedDate: currentDate),
       ),
     );
   }
