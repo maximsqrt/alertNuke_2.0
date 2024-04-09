@@ -44,7 +44,7 @@ class MonthGridItem extends StatelessWidget {
             const SizedBox(height: 10),
             Expanded(
               child: Container(
-                child: buildMonthPage(monthIndex  , yearProvider,1, 10,dayCallback: (day) => dayCallback(day)),
+                child: buildMonthPage(monthIndex  , yearProvider,1,dayCallback: (day) => dayCallback(day)),
               ),
             ),
           ],

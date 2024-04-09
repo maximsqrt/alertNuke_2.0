@@ -4,9 +4,10 @@ import 'package:alertnukeapp_ver2/src/data/provider/yearprovider.dart';
 import 'package:alertnukeapp_ver2/src/presentation/theme/colors.dart';
 import 'package:alertnukeapp_ver2/src/presentation/theme/isdaycolor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 Widget buildMonthPage(
-    int monthIndex, YearProvider yearProvider, double childAspectRatio, int fontSize, {required Function(int) dayCallback}) {
+    int monthIndex, YearProvider yearProvider, double childAspectRatio,  {required Function(int) dayCallback}) {
   // Anpassung hier: Monatsindex + 1, um von 0-basierter zu 1-basierter Indexierung zu wechseln
   int correctedMonthIndex = monthIndex + 1;
   DateTime now = DateTime.now();
@@ -18,10 +19,10 @@ Widget buildMonthPage(
       borderRadius: BorderRadius.circular(3),
       gradient: MonthColor.fancyLinearGradient(),
     ),
-    child: buildMonthGridView(correctedMonthIndex, dateTimeCalc, isCurrentMonth, childAspectRatio, fontSize, dayCallback, yearProvider, now),
+    child: buildMonthGridView(correctedMonthIndex, dateTimeCalc, isCurrentMonth, childAspectRatio, dayCallback, yearProvider, now),
   );
 }
-Widget buildDayWithAppointmentIndicator(DateTime date, bool isCurrentMonth, YearProvider yearProvider, int day, double childAspectRatio, int fontSize, Function(int) dayCallback) {
+Widget buildDayWithAppointmentIndicator(DateTime date, bool isCurrentMonth, YearProvider yearProvider, int day, double childAspectRatio,  Function(int) dayCallback) {
 //  print("Day cast in builddaywithapp....: $day");
   Color currentDayWeekAndColor = determineDayColor(date, isCurrentMonth, yearProvider);
   return FutureBuilder<bool>(
@@ -33,10 +34,10 @@ Widget buildDayWithAppointmentIndicator(DateTime date, bool isCurrentMonth, Year
                 ? AppointmentDayColor.primaryColor
                 : DefaultDayColor.primaryColor;
 
-        return buildDayContainer(day, dayColor, currentDayWeekAndColor, childAspectRatio, fontSize, dayCallback);
+        return buildDayContainer(day, dayColor, currentDayWeekAndColor, childAspectRatio,  dayCallback);
       });
 }
-Widget buildDayContainer(int day, Color dayColor, Color backgroundColor, double childAspectRatio, int fontSize, Function(int) dayCallback) {
+Widget buildDayContainer(int day, Color dayColor, Color backgroundColor, double childAspectRatio, Function(int) dayCallback) {
 //  print("Day cast in buildDayContainer: $day");
   return GestureDetector(
     onTap: () {
@@ -45,7 +46,14 @@ Widget buildDayContainer(int day, Color dayColor, Color backgroundColor, double 
     },
     child: AspectRatio(
       aspectRatio: childAspectRatio,
-      child: Container(
+      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+        //calculate fontsize dependend of container 
+        double minSize = constraints.maxWidth < constraints.maxHeight ? constraints.maxWidth : constraints.maxHeight;
+         double calculatedFontSize = minSize *.75;
+      
+      
+      
+      return Container(
         decoration: BoxDecoration(
           border: Border.all(width: 0.1, color: dayColor),
           borderRadius: BorderRadius.circular(3.0),
@@ -56,16 +64,18 @@ Widget buildDayContainer(int day, Color dayColor, Color backgroundColor, double 
             day.toString(),
             style: TextStyle(
               fontWeight: FontWeight.normal,
-              fontSize: fontSize.toDouble(),
+              fontSize: calculatedFontSize,
               color: dayColor,
+              ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     ),
   );
 }
-Widget buildMonthGridView(int correctedMonthIndex, DateTimeCalc dateTimeCalc, bool isCurrentMonth, double childAspectRatio, int fontSize, Function(int) dayCallback, YearProvider yearProvider, DateTime now) {
+Widget buildMonthGridView(int correctedMonthIndex, DateTimeCalc dateTimeCalc, bool isCurrentMonth, double childAspectRatio, Function(int) dayCallback, YearProvider yearProvider, DateTime now) {
   return GridView.builder(
     physics: const NeverScrollableScrollPhysics(),
     padding: EdgeInsets.zero,
@@ -80,7 +90,7 @@ Widget buildMonthGridView(int correctedMonthIndex, DateTimeCalc dateTimeCalc, bo
       int day = index + 1;
       bool isToday = isCurrentMonth && day == now.day;
       DateTime date = DateTime(yearProvider.year, correctedMonthIndex, day);
-      return buildDayWithAppointmentIndicator(date, isCurrentMonth, yearProvider, day, childAspectRatio, fontSize, dayCallback);
+      return buildDayWithAppointmentIndicator(date, isCurrentMonth, yearProvider, day, childAspectRatio,  dayCallback);
     },
   );
 }

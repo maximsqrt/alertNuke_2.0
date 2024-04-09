@@ -56,6 +56,15 @@ class _MonthCalendarState extends State<MonthCalendar> {
   // Building the UI for the MonthCalendar
   @override
   Widget build(BuildContext context) {
+
+    //Screensize call 
+    Size screenSize = MediaQuery.of(context).size;
+    // aspectRatio für die Buildmonth Page 
+    double aspectRatio = 2;
+    double containerWidth = screenSize.width;
+    //define Containerheight dependend on AspectRatio 
+    double containerheight = containerWidth * aspectRatio;
+
     print("Selected Year: ${widget.selectedYear}");
     ScrollController _scrollController = ScrollController();
     final yearProvider = Provider.of<YearProvider>(context);
@@ -65,8 +74,8 @@ class _MonthCalendarState extends State<MonthCalendar> {
         children: [
           // Background container with gradient and styling
           Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
+            height: containerheight,
+            width: screenSize.width,
             decoration: BoxDecoration(
               color: BackgroundColor.primaryColor,
               borderRadius: BorderRadius.circular(3.0),
@@ -106,7 +115,7 @@ class _MonthCalendarState extends State<MonthCalendar> {
 
                       // Build a month page using a custom function
                       return buildMonthPage(
-                          monthIndex , yearProvider, 0.5, 20,
+                          monthIndex , yearProvider, aspectRatio, 
                           
                           dayCallback: (day) => widget.dayCallback(day));
                     },
