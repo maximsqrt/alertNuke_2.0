@@ -47,15 +47,15 @@ Widget buildDayContainer(int day, Color dayColor, Color backgroundColor, double 
       aspectRatio: childAspectRatio,
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(width: 0.70, color: dayColor),
-          borderRadius: BorderRadius.circular(6.0),
+          border: Border.all(width: 0.1, color: dayColor),
+          borderRadius: BorderRadius.circular(3.0),
           color: backgroundColor,
         ),
         child: Center(
           child: Text(
             day.toString(),
             style: TextStyle(
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.normal,
               fontSize: fontSize.toDouble(),
               color: dayColor,
             ),

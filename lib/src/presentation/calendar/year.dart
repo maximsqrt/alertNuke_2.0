@@ -101,7 +101,7 @@ class _YearCalendarState extends State<YearCalendar> {
    
     return Flexible(
       child: GridView.builder(
-        physics: const NeverScrollableScrollPhysics(),
+        
         key: PageStorageKey('MonthGridView-${yearProvider.year}'),
         itemCount: 12,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -123,7 +123,7 @@ class _YearCalendarState extends State<YearCalendar> {
       children: [
         Card(
           color: const Color.fromARGB(114, 0, 0, 0),
-          elevation: 3,
+          elevation: 10,
           child: AspectRatio(
             aspectRatio: 1.0,
             child: MonthGridItem(
