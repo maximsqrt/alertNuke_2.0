@@ -3,6 +3,7 @@
 import 'package:alertnukeapp_ver2/src/Services/calendar_services/timecolumn.dart';
 import 'package:alertnukeapp_ver2/src/data/provider/yearprovider.dart';
 import 'package:alertnukeapp_ver2/src/presentation/components/buildcalendar.dart/buildmonth.dart';
+import 'package:alertnukeapp_ver2/src/presentation/components/buildcalendar.dart/buildmonthformonth.dart';
 import 'package:alertnukeapp_ver2/src/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -63,7 +64,7 @@ class _MonthCalendarState extends State<MonthCalendar> {
     double aspectRatio = 2;
     double containerWidth = screenSize.width;
     //define Containerheight dependend on AspectRatio 
-    double containerheight = containerWidth * aspectRatio;
+    double containerheight = containerWidth*2;
 
     print("Selected Year: ${widget.selectedYear}");
     ScrollController _scrollController = ScrollController();
@@ -81,7 +82,7 @@ class _MonthCalendarState extends State<MonthCalendar> {
               borderRadius: BorderRadius.circular(3.0),
             ),
             padding:
-                const EdgeInsets.only(top: 100, left: 10, right: 10, bottom: 0),
+                const EdgeInsets.only(top: 100, left: 10, right: 10, bottom: 100),
             child: Column(
               children: [
                 const SizedBox(height: 100),
@@ -114,7 +115,7 @@ class _MonthCalendarState extends State<MonthCalendar> {
                       int monthIndex = index ;
 
                       // Build a month page using a custom function
-                      return buildMonthPage(
+                      return buildMonthPage2(
                           monthIndex , yearProvider, aspectRatio, 
                           
                           dayCallback: (day) => widget.dayCallback(day));
