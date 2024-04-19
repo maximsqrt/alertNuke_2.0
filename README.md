@@ -1,3 +1,3 @@
 # alertuke_ver2
 
-A new Flutter project.
+Alernuke Beta 2.0 
