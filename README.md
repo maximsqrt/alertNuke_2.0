@@ -1,3 +1,3 @@
 # alertuke_ver2
 
-Alernuke Beta 2.0 
+Alernuke Alpha 2.0 
