@@ -47,7 +47,7 @@ class LoginScreen extends StatelessWidget {
 
   Widget _buildLogo() {
     return Image.asset(
-      'assets/logo.png',
+      'assets/alertnukelogo.png',
       width: 200,
       height: 200,
     );

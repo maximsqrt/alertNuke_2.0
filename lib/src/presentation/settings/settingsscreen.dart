@@ -1,14 +1,12 @@
 import 'dart:io';
-
 import 'package:alertnukeapp_ver2/src/Services/auth_login_service.dart';
 import 'package:alertnukeapp_ver2/src/Services/firebaseuserdata.dart';
 import 'package:alertnukeapp_ver2/src/data/firestore/firebaseimagestorage.dart';
 import 'package:alertnukeapp_ver2/src/data/firestore/profilepic.dart';
 import 'package:alertnukeapp_ver2/src/data/provider/profilepictureprovider.dart';
-import 'package:alertnukeapp_ver2/src/presentation/calendar/calendar.dart';
+import 'package:alertnukeapp_ver2/src/presentation/login/login.dart';
 import 'package:alertnukeapp_ver2/src/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
-
 import 'package:icony/icony_ikonate.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -119,7 +117,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: const Text('Settings'),
         leading: IconButton(
-            icon: Icon(UniconsLine.arrow_circle_left),
+            icon: Icon(UniconsLine.exit),
             onPressed: () {
               logout(context);
             }),
@@ -190,7 +188,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void logout(BuildContext context) async {
     await widget.authService.signOut();
     Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => Calendar()));
+        .pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 
   Widget _buildSaveButton(BuildContext context) {

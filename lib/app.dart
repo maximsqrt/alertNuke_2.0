@@ -20,6 +20,7 @@ class AlertnukeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        //Streamprovider to react on changes of the auth-status of the user
          StreamProvider<User?>.value(
           value: FirebaseAuth.instance.authStateChanges(),
           initialData: null,
@@ -40,6 +41,7 @@ class AlertnukeApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: AuthWrapper(), // Startseite ist der LoginScreen
       ),
     );
