@@ -87,17 +87,28 @@ class _IconsScreenState extends State<IconsScreen> {
 
 
     ),
-    floatingActionButton: FloatingActionButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => IconsChoosenScreen()),
-        );
-      },
-      child: Icon(UniconsLine.plus),
-      backgroundColor: Colors.blue, // Set your desired color
+  floatingActionButton: Container(
+  width: 56,  // Standardbreite für FloatingActionButton
+  height: 56,  // Standardhöhe für FloatingActionButton
+  decoration: BoxDecoration(
+    shape: BoxShape.circle,
+    gradient: FancyButtonColor.linearGradient(),  // Deine gewünschten Gradientenfarben
     ),
-    floatingActionButtonLocation: FloatingActionButtonLocation.endFloat, // Position FAB at the bottom right
+  
+  child: FloatingActionButton(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => IconsChoosenScreen()),
+      );
+    },
+    backgroundColor: Colors.transparent,  // Wichtig: Hintergrundfarbe transparent setzen
+    child: Icon(UniconsLine.plus),
+    elevation: 0,  // Optional: Schatten entfernen, falls gewünscht
+  ),
+),
+floatingActionButtonLocation: FloatingActionButtonLocation.endFloat, // Position FAB at the bottom right
+// Position FAB at the bottom right
   );
     
   }

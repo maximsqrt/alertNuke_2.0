@@ -115,7 +115,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: const Text('Settings', style: TextStyle(fontWeight: FontWeight.bold,color: Color.fromARGB(189, 255, 255, 255)),),
         leading: IconButton(
             icon: Icon(UniconsLine.exit),
             onPressed: () {
@@ -153,15 +153,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               const SizedBox(height: 20),
               EditableField(
+                  textColor: Colors.white,
                   label: 'Name:',
                   value: FirebaseUserData
                       .username), // Use your FirebaseUserData here
               const SizedBox(height: 10),
               const EditableField(
+                 textColor: Colors.white,
                   label: 'Phone Number:',
                   value: ''), // Provide phone number value if available
               const SizedBox(height: 10),
               EditableField(
+                 
                   label: 'Email Address:',
                   value: FirebaseUserData.email,
                   textColor: Colors.white), // Use your FirebaseUserData here
@@ -171,7 +174,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: Container(
+        width: 56, 
+        height: 56,
+        decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: FancyButtonColor.linearGradient()),
+        
+        child: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet<void>(
             context: context,
@@ -180,17 +190,41 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           );
         },
-        child: const Ikonate(Ikonate.image),
+        backgroundColor: Colors.transparent,
+        child: Icon(UniconsLine.image, color: Colors.white,),
       ),
-    );
+    ),);
   }
+// how to add Gradient to Button : 
+// floatingActionButton: Container(
+//   width: 56,  // Standardbreite für FloatingActionButton
+//   height: 56,  // Standardhöhe für FloatingActionButton
+//   decoration: BoxDecoration(
+//     shape: BoxShape.circle,
+//     gradient: FancyButtonColor.linearGradient(),  // Deine gewünschten Gradientenfarben
+//     ),
+  
+//   child: FloatingActionButton(
+//     onPressed: () {
+//       Navigator.push(
+//         context,
+//         MaterialPageRoute(builder: (context) => IconsChoosenScreen()),
+//       );
+//     },
+//     backgroundColor: Colors.transparent,  // Wichtig: Hintergrundfarbe transparent setzen
+//     child: Icon(UniconsLine.plus),
+//     elevation: 0,  // Optional: Schatten entfernen, falls gewünscht
+//   ),
+// ),
+// floatingActionButtonLocation: FloatingActionButtonLocation.endFloat, /
+
 
   void logout(BuildContext context) async {
     await widget.authService.signOut();
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
   }
-
+  //Elevated Button kann die Style Eigenschaft benutzt werden 
   Widget _buildSaveButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () {},
